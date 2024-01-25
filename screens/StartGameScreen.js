@@ -1,7 +1,6 @@
 import { TextInput, View, StyleSheet } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
-
 function StartGameScreen(){
     return (
         <View style={styles.inputContainer}>
@@ -10,16 +9,27 @@ function StartGameScreen(){
                 maxLength={2}
                 keyboardType="number-pad" //cross plattform -> look doc
                 autoCapitalize='none'
+                autoCorrect={false}
             />
-            <PrimaryButton>Reset</PrimaryButton>
-            <PrimaryButton>Confirm</PrimaryButton>
+            <View style={styles.buttonsContainer}>
+                <View style={styles.buttonContainer}>
+                    <PrimaryButton>Reset</PrimaryButton>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <PrimaryButton>Confirm</PrimaryButton>
+                </View>
+            </View>
         </View>
     );
 }
 export default StartGameScreen;
 
+
+
 const styles = StyleSheet.create({
     inputContainer: {
+        justifyContent: 'center',
+        alignItems: 'stretch',
         padding: 16,
         marginTop:100,
         marginHorizontal: 24,
@@ -28,9 +38,11 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         elevation: 4, // android only shadow
         shadowColor: 'black', // ios
-        shadowOffset: { width: 2, height: 2}, // ios
+        shadowOffset: { width: 2, height: 2 }, // ios
         shadowRadius: 6, // ios
         shadowOpacity: 0.25 // ios
+
+    
     },
     numberInput: {
         height: 50,
@@ -41,6 +53,14 @@ const styles = StyleSheet.create({
         color: '#ddb52f',
         marginVertical: 8,
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center',
+        // flex: 1,
+        // justifyContent: 'center'
+    },
+    buttonsContainer: {
+        flexDirection:'row'
+    },
+    buttonContainer: {
+        flex: 1
     }
-})
+});

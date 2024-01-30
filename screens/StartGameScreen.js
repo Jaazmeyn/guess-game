@@ -1,7 +1,34 @@
-import { TextInput, View, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { TextInput, View, StyleSheet, Alert } from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 
 function StartGameScreen(){
+    const [enteredNumber, setEnteredNumber] = useState('');
+
+    function numberInputHandler(enteredText){
+        //update enterednumberstate
+        setEnteredNumber(enteredText); // enteredText is from TextInput automatically
+    }
+
+    function resetInputHandler(){
+        setEnteredNumber('');
+    }
+
+    function confirmInputHandler(){
+        const chosenNumber = parseInt(enteredNumber);
+
+        if ( isNaN(chosenNumber) 
+            || chosenNumber <= 0 
+            || chosenNumber > 99) {
+                Alert.alert('Invalid number', 
+                    'Number has to be between 1 and 99.',
+                [{text: 'Okay', style: 'destructive', onPress: resetInputHandler}]    
+        );
+            return;
+        }
+        console.log('Valid number!');
+    }
+
     return (
         <View style={styles.inputContainer}>
             <TextInput 
@@ -10,13 +37,15 @@ function StartGameScreen(){
                 keyboardType="number-pad" //cross plattform -> look doc
                 autoCapitalize='none'
                 autoCorrect={false}
+                onChangeText={numberInputHandler}
+                value={enteredNumber}
             />
             <View style={styles.buttonsContainer}>
                 <View style={styles.buttonContainer}>
-                    <PrimaryButton>Reset</PrimaryButton>
+                    <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <PrimaryButton>Confirm</PrimaryButton>
+                    <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
                 </View>
             </View>
         </View>
@@ -29,7 +58,7 @@ export default StartGameScreen;
 const styles = StyleSheet.create({
     inputContainer: {
         justifyContent: 'center',
-        alignItems: 'stretch',
+        alignItems: 'center',
         padding: 16,
         marginTop:100,
         marginHorizontal: 24,
@@ -40,9 +69,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black', // ios
         shadowOffset: { width: 2, height: 2 }, // ios
         shadowRadius: 6, // ios
-        shadowOpacity: 0.25 // ios
-
-    
+        shadowOpacity: 0.25, // ios
     },
     numberInput: {
         height: 50,
@@ -54,13 +81,12 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         fontWeight: 'bold',
         textAlign: 'center',
-        // flex: 1,
-        // justifyContent: 'center'
     },
     buttonsContainer: {
         flexDirection:'row'
     },
     buttonContainer: {
-        flex: 1
+        flex: 1,
+        flexDirection:'column'
     }
 });

@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
 
 import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
@@ -27,7 +27,7 @@ export default function App() {
           resizeMode='cover'
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}>
-        {screen}
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
     </View>
   );

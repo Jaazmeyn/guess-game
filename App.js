@@ -4,6 +4,7 @@ import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
 
 import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function App() {
 
@@ -35,11 +36,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   rootScreen: {
-    backgroundColor: '#ddb52f',
+    backgroundColor: Colors.primary700,
     flex:1,
-    backgroundImage: 'linear-gradient(to bottom, #ff0000 10%, #72063c 60%)'
+    // backgroundImage: `linear-gradient(to bottom,` + Colors.primary700+ `,` + Colors.accent500 +`)`
   },
-  backgroundImage: {
+  backgroundImage: { 
     opacity: 0.11,
   }
 });
